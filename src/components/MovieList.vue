@@ -1,13 +1,13 @@
 <template>
-  <ul>
+  <div class="movie-list">
     <Movie
-      is="li"
       v-for="movie of movies"
       v-bind:key="movie.id"
-      movie="movie">
+      :movie="movie"
+      @emitMovie="emitMovie">
         <slot/>
     </Movie>
-  </ul>
+  </div>
 </template>
 
 <script>
@@ -23,6 +23,9 @@ export default {
   name: 'MovieList',
   components: { Movie },
   methods: {
+    emitMovie (movie) {
+      this.$emit('emitMovie', movie)
+    }
   }
 }
 </script>

@@ -1,12 +1,13 @@
 <template>
   <div class="movie">
-    <div class="movie__image">
-      <img :src="movie.img" alt="Movie Poster"/>
+    <div class="movie-poster">
+      <img class="movie-poster-image" :src="moviePoster" alt="Movie Poster"/>
     </div>
-    <div class="movie__data">
-      <p>Some data</p>
+    <div class="movie-data">
+      <p><strong>Name:</strong> {{movie.Title}}</p>
+      <p><strong>Year:</strong> {{movie.Year}}</p>
     </div>
-    <div class="movie__button" @click="emitMovie">
+    <div class="movie-button" @click="emitMovie">
       <slot/>
     </div>
   </div>
@@ -21,9 +22,14 @@ export default {
     }
   },
   name: 'Movie',
+  computed: {
+    moviePoster () {
+      return this.movie.Poster || 'assets/default-movie-icon.png'
+    }
+  },
   methods: {
     emitMovie () {
-      this.$emit('click', this.movie)
+      this.$emit('emitMovie', this.movie)
     }
   }
 }

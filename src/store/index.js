@@ -7,7 +7,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     favouriteMovies: [],
-    searchResults: []
+    searchResults: [],
+    loading: false,
+    error: null
   },
   getters: {
     hasFavouriteMovies (state) {
@@ -21,6 +23,12 @@ export default new Vuex.Store({
     },
     getSearchResults (state) {
       return state.searchResults
+    },
+    isLoading (state) {
+      return state.loading
+    },
+    hasSearchError (state) {
+      return state.error
     }
   },
   mutations: {
@@ -30,29 +38,57 @@ export default new Vuex.Store({
     setSearchResults (state, payload) {
       state.searchResults = payload.searchResults
     },
+    setFavouriteMoviesFromLocalStorage (state) {
+      const hasFavouriteMovies = localStorage.getItem('favouriteMovies')
+
+      if (hasFavouriteMovies) {
+        state.favouriteMovies = JSON.parse(hasFavouriteMovies)
+      }
+    },
     addMovieToFavourites (state, payload) {
-      const isMovieInFavourites = state.favouriteMovies.find(movie => movie.id === payload.movie.id)
+      const isMovieInFavourites = state.favouriteMovies.find(movie => movie.imdbID === payload.movie.imdbID)
 
       if (isMovieInFavourites) {
         return
       }
 
       state.favouriteMovies.push(payload.movie)
+      localStorage.favouriteMovies = JSON.stringify(state.favouriteMovies)
     },
     removeMovieFromFavourites (state, payload) {
-      const movieIndex = state.favouriteMovies.findIndex(movie => movie.id === payload.movie.id)
-
-      if (movieIndex !== -1) {
-        return
-      }
-
-      state.favouriteMovies.splice(movieIndex, 1)
+      state.favouriteMovies = state.favouriteMovies.filter(movie => movie.imdbID !== payload.movie.imdbID)
+      localStorage.favouriteMovies = JSON.stringify(state.favouriteMovies)
+    },
+    startLoadingSearchResults (state) {
+      state.loading = true
+    },
+    finishedLoadingSearchResults (state) {
+      state.loading = false
+    },
+    showMovieLoadError (state, payload) {
+      state.searchResults = []
+      state.error = payload.error
+    },
+    hideMovieLoadError (state) {
+      state.error = null
     }
   },
   actions: {
     async searchForMovies (context) {
-      const searchResults = await getMoviesFromQuery({ query: context.state.movieQuery })
-      context.commit('setSearchResults', { searchResults })
+      context.commit('startLoadingSearchResults')
+      try {
+        const searchResults = await getMoviesFromQuery({ query: context.state.movieQuery })
+        context.commit('setSearchResults', { searchResults })
+      } catch (error) {
+        context.commit('showMovieLoadError', { error })
+      } finally {
+        // force loading time for testing how it looks
+        // setTimeout(() => {
+        //   context.commit('finishedLoadingSearchResults')
+        // }, 2000)
+
+        context.commit('finishedLoadingSearchResults')
+      }
     }
   }
 })

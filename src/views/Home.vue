@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <Favourites />
     <SearchModule/>
+    <Favourites/>
   </div>
 </template>
 

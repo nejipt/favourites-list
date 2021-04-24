@@ -1,8 +1,21 @@
 <template>
   <div class="favourite__movies">
-    <MovieList v-if="hasFavouriteMovies" :movies="getFavouriteMovies">
-      <button class="btn btn-danger" @click="removeMovieFromFavourites">Delete</button>
-    </MovieList>
+    <div class="favourite__movies-header">
+      <label
+        class="favourite__movies-header-label"
+      >
+        Favourites
+      </label>
+    </div>
+    <div class="favourite__movies-movie-list">
+      <MovieList
+        v-if="hasFavouriteMovies"
+        :movies="getFavouriteMovies"
+        @emitMovie="removeMovieFromFavourites"
+      >
+        <button class="btn btn-danger favourite__movies-movie-list-btn">Delete</button>
+      </MovieList>
+    </div>
   </div>
 </template>
 

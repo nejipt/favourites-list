@@ -1,11 +1,15 @@
 const API_KEY = 'bf01e6e2'
 
 async function getMoviesFromQuery ({ query }) {
-  const response = await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`)
+  const response = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`)
 
-  const results = response.json()
+  const results = await response.json()
 
-  return results
+  if (results.Response !== 'True') {
+    throw new Error()
+  }
+
+  return results.Search
 }
 
 export {
