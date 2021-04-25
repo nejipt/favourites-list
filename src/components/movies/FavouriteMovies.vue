@@ -8,24 +8,24 @@
       </label>
     </div>
     <div class="favourite__movies-movie-list">
-      <MovieList
-        v-if="hasFavouriteMovies"
-        :movies="getFavouriteMovies"
-        @emitMovie="removeMovieFromFavourites"
-      >
-        <button class="btn btn-danger favourite__movies-movie-list-btn">Delete</button>
-      </MovieList>
+      <Movie
+        v-for="movie of getFavouriteMovies"
+        v-bind:key="movie.id"
+        :movie="movie"
+        @emitMovie="removeMovieFromFavourites">
+          <button class="btn btn-danger favourite__movies-movie-list-btn">Delete</button>
+      </Movie>
     </div>
   </div>
 </template>
 
 <script>
-import MovieList from './MovieList'
+import Movie from './Movie'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Favourites',
-  components: { MovieList },
+  name: 'FavouriteMovies',
+  components: { Movie },
   computed: {
     ...mapGetters([
       'hasFavouriteMovies',

@@ -1,6 +1,6 @@
 const API_KEY = 'bf01e6e2'
 
-async function getMoviesFromQuery ({ query }) {
+async function getMovies ({ query }) {
   const response = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`)
 
   const results = await response.json()
@@ -13,5 +13,5 @@ async function getMoviesFromQuery ({ query }) {
 }
 
 export {
-  getMoviesFromQuery
+  getMovies
 }

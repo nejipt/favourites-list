@@ -8,8 +8,5 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  render: function (h) { return h(App) },
-  mounted () {
-    this.$store.commit('setFavouriteMoviesFromLocalStorage')
-  }
+  render: function (h) { return h(App) }
 }).$mount('#app')
