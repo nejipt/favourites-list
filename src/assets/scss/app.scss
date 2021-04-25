@@ -8,110 +8,33 @@
   z-index: 10;
   scroll-behavior: smooth;
   overflow-y: auto;
-}
-
-.home {
-  content: "";
-  display: table;
-  clear: both;
   color: grey;
   font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
-.favourite__movies {
-  float: left;
-  width: 500px;
-  text-align: center;
-
-  &-header {
-    height: 100px;
-    margin: 30px;
-
-    &-label {
-      display: block;
-      position: relative;
-      margin: 10px;
-      font-size: 30px;
-    }
-  }
-
-  &-movie-list {
-    &-btn {
-    }
-  }
+.about {
+  color: rebeccapurple;
 }
 
-.search__module {
-  float: left;
-  width: 50%;
-  text-align: center;
+.movies {
+  content: "";
+  display: table;
+  clear: both;
 
-  &-header {
-    height: 100px;
-    margin: 30px;
-
-    &-label {
-      display: block;
-      position: relative;
-      margin: 10px;
-      font-size: 30px;
-    }
-
-    &-input {
-      height: 30px;
-      margin: 10px;
-      font-size: 15px;
-    }
-  }
-
-  &-results {
+  .favourite__movies {
+    float: left;
     width: 500px;
+    text-align: center;
 
-    &-loading {
-      padding-top: 100px;
+    &-header {
+      height: 100px;
+      margin: 30px;
 
-      .lds-dual-ring {
-        display: inline-block;
-        width: 80px;
-        height: 80px;
-      }
-      .lds-dual-ring:after {
-        content: " ";
+      &-label {
         display: block;
-        width: 64px;
-        height: 64px;
-        margin: 8px;
-        border-radius: 50%;
-        border: 6px solid #fff;
-        border-color: #fff transparent #fff transparent;
-        animation: lds-dual-ring 1.2s linear infinite;
-      }
-      @keyframes lds-dual-ring {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-    }
-
-    &-error {
-      width: 200px;
-      margin: auto;
-      border: solid 2px palevioletred;
-      border-radius: 20px;
-
-      &-message {
-        font-size: 25px;
+        position: relative;
         margin: 10px;
-      }
-
-      &-btn {
-        width: 70px !important;
-        height: 30px !important;
-        margin: 10px;
+        font-size: 30px;
       }
     }
 
@@ -120,50 +43,136 @@
       }
     }
   }
-}
 
-.movie {
-  display: inline-block;
-  width: 400px;
-  height: 480px;
-  margin: 10px;
-  border: 2px solid lightslategray;
-  padding: 10px;
-  border-radius: 20px;
-  flex: 1 100%;
-  background-color: teal;
-  color: black;
+  .search__movies {
+    float: left;
+    width: 50%;
+    text-align: center;
 
-  &-poster {
-    height: 300px;
-    width: 150px;
-    display: flex;
-    margin: auto;
-    justify-content: center;
-    align-items: center;
+    &-header {
+      height: 100px;
+      margin: 30px;
 
-    &-image {
-      width:100%;
-      height: auto;
-      border: 1px solid black;
-      border-radius: 20px;
+      &-label {
+        display: block;
+        position: relative;
+        margin: 10px;
+        font-size: 30px;
+      }
+
+      &-input {
+        height: 30px;
+        margin: 10px;
+        font-size: 15px;
+      }
+    }
+
+    &-results {
+      width: 500px;
+
+      &-loading {
+        padding-top: 100px;
+
+        .lds-dual-ring {
+          display: inline-block;
+          width: 80px;
+          height: 80px;
+        }
+        .lds-dual-ring:after {
+          content: " ";
+          display: block;
+          width: 64px;
+          height: 64px;
+          margin: 8px;
+          border-radius: 50%;
+          border: 6px solid #fff;
+          border-color: #fff transparent #fff transparent;
+          animation: lds-dual-ring 1.2s linear infinite;
+        }
+        @keyframes lds-dual-ring {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
+      }
+
+      &-error {
+        width: 200px;
+        margin: auto;
+        border: solid 2px palevioletred;
+        border-radius: 20px;
+
+        &-message {
+          font-size: 25px;
+          margin: 10px;
+        }
+
+        &-btn {
+          width: 70px !important;
+          height: 30px !important;
+          margin: 10px;
+        }
+      }
+
+      &-movie-list {
+        &-btn {
+        }
+      }
     }
   }
 
-  &-data {
-    text-align: center;
-  }
+  .movie {
+    display: inline-block;
+    width: 400px;
+    height: 480px;
+    margin: 10px;
+    border: 2px solid lightslategray;
+    padding: 10px;
+    border-radius: 20px;
+    flex: 1 100%;
+    background-color: teal;
+    color: black;
 
-  &-button {
-    width: 100px;
-    height: 50px;
-    display: flex;
-    margin: auto;
-    justify-content: center;
-    align-items: center;
+    &-poster {
+      height: 300px;
+      width: 150px;
+      display: flex;
+      margin: auto;
+      justify-content: center;
+      align-items: center;
+
+      &-image {
+        width:100%;
+        height: auto;
+        border: 1px solid black;
+        border-radius: 20px;
+      }
+    }
+
+    &-data {
+      text-align: center;
+    }
+
+    &-button {
+      width: 100px;
+      height: 50px;
+      display: flex;
+      margin: auto;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 
+.recipes {
+
+}
+
+// base classes
 .btn {
   width: 100%;
   height: 100%;
@@ -173,15 +182,36 @@
   font-family: "Lucida Console", monospace;
   font-size: 20px;
 
-  &-primary {
+  &.btn-primary {
     background-color: lightgreen;
   }
 
-  &-danger {
+  &.btn-danger {
     background-color: indianred;
   }
 
-  &-error {
+  &.btn-error {
     background-color: darkred;
+  }
+}
+
+// other elements
+a {
+  display: inline-block;
+  color: darkslategray;
+  text-decoration: none;
+
+  &:visited {
+    color: mediumpurple;
+  }
+
+  &:hover {
+    color: palevioletred;
+    text-decoration: underline;
+    text-underline: palevioletred;
+  }
+
+  &:active {
+    color: lightseagreen;
   }
 }

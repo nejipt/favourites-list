@@ -4,8 +4,8 @@
       <img class="movie-poster-image" :src="moviePoster" alt="Movie Poster"/>
     </div>
     <div class="movie-data">
-      <p><strong>Name:</strong> {{movie.Title}}</p>
-      <p><strong>Year:</strong> {{movie.Year}}</p>
+      <p><strong>Name:</strong> {{movie.title}}</p>
+      <p><strong>Year:</strong> {{movie.year}}</p>
     </div>
     <div class="movie-button" @click="emitMovie">
       <slot/>
@@ -14,17 +14,19 @@
 </template>
 
 <script>
+import { Movie } from '../../lib/util/movie'
+
 export default {
   props: {
     movie: {
-      type: Object,
+      type: Movie,
       required: true
     }
   },
   name: 'Movie',
   computed: {
     moviePoster () {
-      return this.movie.Poster || 'assets/default-movie-icon.png'
+      return this.movie.poster || 'assets/default-movie-icon.png'
     }
   },
   methods: {
