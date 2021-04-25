@@ -74,7 +74,7 @@ export default {
     async searchForMovies (context) {
       context.commit('startLoadingSearchResults')
       try {
-        const movieSearchResults = await getMovies({ query: context.state.movieQuery })
+        const movieSearchResults = await getMovies(context.state.movieQuery)
         context.commit('setSearchResults', { movieSearchResults })
       } catch (error) {
         context.commit('showMovieLoadError', { error })

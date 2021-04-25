@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { getMovies } from '../api/movie'
+import { getMovies, getMovie } from '../api/movie'
 import { getRecipes } from '../api/recipe'
 
 Vue.use(Vuex)
@@ -149,12 +149,23 @@ export default new Vuex.Store({
     async searchForMovies (context) {
       context.commit('startMovieLoading')
       try {
-        const movieSearchResults = await getMovies({ query: context.state.movieQuery })
+        const movieSearchResults = await getMovies(context.state.movieQuery)
         context.commit('setMovieSearchResults', { movieSearchResults })
       } catch (error) {
         context.commit('showMovieLoadError', { error })
       } finally {
-        await context.dispatch('forceLoading')
+        // await context.dispatch('forceLoading')
+        context.commit('finishMovieLoading')
+      }
+    },
+    async getMovieDetail (context) {
+      context.commit('startMovieLoading')
+      try {
+        await getMovie(context.state.id)
+      } catch (error) {
+        context.commit('showMovieLoadError', { error })
+      } finally {
+        // await context.dispatch('forceLoading')
         context.commit('finishMovieLoading')
       }
     },
@@ -167,7 +178,7 @@ export default new Vuex.Store({
       } catch (error) {
         context.commit('showRecipeLoadError', { error })
       } finally {
-        await context.dispatch('forceLoading')
+        // await context.dispatch('forceLoading')
         context.commit('finishRecipeLoading')
       }
     },
